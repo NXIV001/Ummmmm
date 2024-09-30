@@ -1,0 +1,85 @@
+<html>
+<head>
+    <title>Portrait Clock</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+        }
+        .time {
+            font-size: 5rem; /* Middle size */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .time .hours {
+            color: #ff6f00;
+            margin-bottom: 20px;
+        }
+        .time .minutes {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .time .seconds {
+            color: #fff;
+            font-size: 2.5rem; /* Adjusted to match middle size */
+        }
+        .fullscreen-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="time">
+        <div class="hours" id="hours">00</div>
+        <div class="minutes" id="minutes">00</div>
+        <div class="seconds" id="seconds">00</div>
+    </div>
+    <button class="fullscreen-button" onclick="toggleFullScreen()">
+        <i class="fas fa-expand"></i>
+    </button>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>
